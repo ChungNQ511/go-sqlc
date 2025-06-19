@@ -1,0 +1,44 @@
+host: localhost:8080
+info:
+  contact:
+    email: example@example.com
+    name: Example Developer Team
+  description: |-
+    Example API for testing and development.
+    Features include:
+    - Example of API
+    - Example of API
+    - Example of API
+  title: Example API
+  version: "1.0"
+paths:
+  /api:
+    get:
+      consumes:
+      - application/json
+      description: Configure all routes for the application
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: Set up application routes
+      tags:
+      - router
+  /api/example:
+    get:
+      consumes:
+      - application/json
+      description: Returns a hello world message
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Get example
+      tags:
+      - example
+swagger: "2.0"
