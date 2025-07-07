@@ -82,7 +82,7 @@ db-rollback-one: # support rollback the last migration version
 	goose -dir db/migrations $$DATABASE_DRIVER "$$DATABASE_DRIVER://$$DATABASE_USERNAME:$$DATABASE_PASSWORD@$$DATABASE_HOST:$$DATABASE_PORT/$$DATABASE_NAME?sslmode=disable" down
 
 db-migrate: ## Perform all migration operations, commit file migrate & list migration status
-	make migrate && make remove-migration-temp && make sqlc-migrations-commit && make db-migration-status
+	make migrate && make sqlc-migrations-commit && make db-migration-status
 
 db-migration-status: ## Check the status of the migration, whether it is pending or has been migrated
 	goose -dir db/migrations $$DATABASE_DRIVER "$$DATABASE_DRIVER://$$DATABASE_USERNAME:$$DATABASE_PASSWORD@$$DATABASE_HOST:$$DATABASE_PORT/$$DATABASE_NAME?sslmode=disable" status
