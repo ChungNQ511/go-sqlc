@@ -10,15 +10,15 @@ Dựa trên cấu trúc thư mục của project và nội dung file `main.go`, 
 
 ## ⚙️ Công nghệ sử dụng
 
-* **Golang**
-* **Gin** – web framework
-* **Swagger (swaggo)** – tài liệu API
-* **PostgreSQL** – database chính
-* **SQLC** – sinh code từ query SQL
-* **Goose** - quản lý migration DB bằng Go/script
-* **Redis** – caching
-* **Docker** – đóng gói dịch vụ
-* **Makefile + Shell script** – tiện ích phát triển & migration
+- **Golang**
+- **Gin** – web framework
+- **Swagger (swaggo)** – tài liệu API
+- **PostgreSQL** – database chính
+- **SQLC** – sinh code từ query SQL
+- **Goose** - quản lý migration DB bằng Go/script
+- **Redis** – caching
+- **Docker** – đóng gói dịch vụ
+- **Makefile + Shell script** – tiện ích phát triển & migration
 
 ## 🧱 Cấu trúc thư mục
 
@@ -51,23 +51,29 @@ Tạo file `.env` hoặc sửa `app.env`:
 
 ```env
 SERVER_ADDRESS=8080
-DB_SOURCE=postgresql://user:pass@localhost:5432/dbname?sslmode=disable
 REDIS_HOST=localhost:6379
-REDIS_PASSWORD=
 CORS_ORIGIN=*
 SWAGGER_HOST=localhost:8080
+
+DATABASE_DRIVER=postgres
+DATABASE_HOST=localhost
+DATABASE_PORT=5432
+DATABASE_USERNAME=postgres
+DATABASE_PASSWORD=123456789
+DATABASE_NAME=example_db
 ```
 
 ### 2. Cài đặt dependencies
 
 ```bash
 go mod tidy
+go install github.com/pressly/goose/v3/cmd/goose@latest
 ```
 
 ### 3. Chạy migration
 
 ```bash
-make migrate-up
+make db-migrate
 ```
 
 ### 4. Chạy ứng dụng
@@ -78,8 +84,8 @@ go run main.go
 
 ### 5. Truy cập API
 
-* Swagger: [http://localhost:8080/swagger/index.html](http://localhost:8080/swagger/index.html)
-* Health check: `GET /api/healthz`
+- Swagger: [http://localhost:8080/swagger/index.html](http://localhost:8080/swagger/index.html)
+- Health check: `GET /api/healthz`
 
 ## 📦 Build bằng Docker
 
@@ -90,9 +96,9 @@ docker run -p 8080:8080 --env-file app.env example-api
 
 ## 🧪 API mẫu
 
-* `GET /api` – Trả về thông tin version
-* `GET /api/healthz` – Health check
-* Các route ví dụ trong module `examples`
+- `GET /api` – Trả về thông tin version
+- `GET /api/healthz` – Health check
+- Các route ví dụ trong module `examples`
 
 ## 📚 Swagger Documentation
 
